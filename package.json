@@ -18,17 +18,17 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/ameerthehacker/webpack-starter-pack.git"
+        "url": "git+https://github.com/rishiosaur/box.git"
     },
     "keywords": [
         "react"
     ],
-    "author": "ameerthehacker",
+    "author": "Rishi Kothari",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/ameerthehacker/webpack-starter-pack/issues"
+        "url": "https://github.com/rishiosaur/box/issues"
     },
-    "homepage": "https://github.com/ameerthehacker/webpack-starter-pack#readme",
+    "homepage": "https://github.com/rishiosaur/box#readme",
     "dependencies": {
         "@babel/preset-react": "^7.12.13",
         "normalize.css": "^8.0.0",
