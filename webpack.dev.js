@@ -3,18 +3,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     devtool: 'eval-cheap-module-source-map',
-    entry: './src/index.ts',
+    entry: './src/index.tsx',
     devServer: {
         port: 3000,
         contentBase: path.join(__dirname, "dist")
     },
-    node: {
-        fs: 'empty'
+    // node: {
+    //     fs: 'empty'
+    // },
+    resolve: {
+        extensions: ['.ts', '.tsx', '.jsx', '.js', '.json']
     },
+    target: 'node',
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx|ts|tsx)$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 options: {
