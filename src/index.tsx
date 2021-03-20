@@ -3,7 +3,12 @@ import { VNode } from 'snabbdom/build/package/vnode'
 import { init } from 'snabbdom/build/package/init'
 import {propsModule} from 'snabbdom/build/package/modules/props'
 
-const createElement = (type: string, props: Record<string, unknown> = {}, ...children: VNode[] ) => {
+const createElement = (type: string | Function, props: Record<string, unknown> = {}, ...children: VNode[] ) => {
+
+    if (typeof type === "function") {
+        return type(props)
+    }
+
     return h(type, {props}, children.flat())
 }
 
@@ -17,9 +22,16 @@ const render = (element: VNode, root: VNode | Element) => {
 
 const BoxDOM = { render }
 
+const Hello = ({ name }) => <p>Greetings, {name}</p>
+
 const App = (
     <div>
-        {['h', 'm'].map(z => <p>Makin' makin' makin {z} stuff with React!</p>)}
+        {['h', 'm'].map((z,i)=> <p key={i}>Makin' makin' makin {z} stuff with React!</p>)}
+
+        <br/>
+
+        <Hello name={"hi"}/>
+
     </div>
 );
 
