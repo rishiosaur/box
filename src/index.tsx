@@ -2,6 +2,7 @@ import {h} from "snabbdom/build/package/h"
 import { VNode } from 'snabbdom/build/package/vnode'
 import { init } from 'snabbdom/build/package/init'
 import {propsModule} from 'snabbdom/build/package/modules/props'
+import {eventListenersModule} from "snabbdom/build/package/modules/eventlisteners";
 
 const createElement = (type: any, props: Record<string, unknown> = {}, ...children: VNode[] ) => {
 console.log(type)
@@ -21,8 +22,22 @@ console.log(type)
         return type(props)
     }
 
+    const dataProps = {}
+    const eventProps = {}
 
-    return  h(type, {props}, children.flat())
+    for (const key in props) {
+        if (key.startsWith("on")) {
+            const event = key.substring(2).toLowerCase();
+            eventProps[event] = props[key]
+        } else {
+            dataProps[key] = props[key]
+        }
+    }
+
+
+
+
+    return  h(type, {props: dataProps, on: eventProps}, children.flat())
 
 }
 
@@ -63,7 +78,7 @@ const Box = { createElement, Component,
     }
 }
 
-const reconcile = init([propsModule])
+const reconcile = init([propsModule, eventListenersModule])
 
 const render = (element: VNode, root: VNode | Element) => {
     reconcile(root, element)
@@ -90,7 +105,12 @@ class Count extends Box.Component<{initial: number}, {count: number}> {
 
     render() {
         // return (
-        return <p>Count: {this.state.count}</p>
+        return (
+            <div>
+                <p>Count: {this.state.count}</p>
+                <button onClick={() => this.setState({ count: this.state.count + 1 })}>Hello</button>
+
+            </div>)
         // )
     }
 
