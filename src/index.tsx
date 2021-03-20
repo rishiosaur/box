@@ -4,8 +4,7 @@ import { init } from 'snabbdom/build/package/init'
 import {propsModule} from 'snabbdom/build/package/modules/props'
 
 const createElement = (type: string, props: Record<string, unknown> = {}, ...children: VNode[] ) => {
-    console.log(type, props, children);
-    return h(type, {props}, children)
+    return h(type, {props}, children.flat())
 }
 
 const Box = { createElement }
@@ -20,7 +19,7 @@ const BoxDOM = { render }
 
 const App = (
     <div>
-        <p>Makin' makin' makin cool stuff with React!</p>
+        {['h', 'm'].map(z => <p>Makin' makin' makin {z} stuff with React!</p>)}
     </div>
 );
 
