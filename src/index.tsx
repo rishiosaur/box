@@ -7,37 +7,61 @@ const createElement = (type: any, props: Record<string, unknown> = {}, ...childr
 console.log(type)
 
     if (type.prototype && type.prototype.__isBoxClassComponent) {
-         const instance = new type(props)
-        return instance.render()
+        const instance = new type(props)
+        instance.__node = instance.render()
+        instance.__node.data.hook = {
+            create: () => {
+                instance.componentDidMount()
+            }
+        }
+        return instance.__node
     }
 
     if (typeof type === "function") {
         return type(props)
     }
 
-    return h(type, {props}, children.flat())
+
+    return  h(type, {props}, children.flat())
+
 }
 
  class Component<Props, State> {
     state: State
     props: Props
      __isBoxClassComponent: boolean;
+    __node: VNode;
+     static __isBoxClassComponent: boolean;
 
-
-    constructor(props: Props & { children: VNode } ){
+    constructor(props: Props){
         this.props = props
     }
 
     componentDidMount() {}
 
-    setState(partialState: Partial<State>) {}
+    setState(partialState: Partial<State>) {
+        this.state = {
+            ...this.state,
+            ...partialState
+        }
+
+        Box.__update(this)
+    }
 
     render() {}
 }
 
-Component.prototype.__isBoxClassComponent = true;
+Component.prototype.__isBoxClassComponent = true
 
-const Box = { createElement, Component }
+const Box = { createElement, Component,
+    __update: (component: { __node: VNode }) => {
+        const old = component.__node;
+        if (component instanceof Component) {
+            const newNode: any = component.render()
+            component.__node = reconcile(old, newNode);
+        }
+    }
+}
 
 const reconcile = init([propsModule])
 
@@ -50,9 +74,14 @@ const BoxDOM = { render }
 const Hello = ({ name }) => <p>Greetings, {name}</p>
 
 class Count extends Box.Component<{initial: number}, {count: number}> {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
-        this.setState({ count: this.props.initial })
+        this.state = { count: props.initial }
+        setInterval(() => {
+            this.setState({
+                count: this.state.count + 1
+            })
+        }, 1000);
     }
 
     componentDidMount() {
@@ -60,15 +89,14 @@ class Count extends Box.Component<{initial: number}, {count: number}> {
     }
 
     render() {
-        return (
-            <div>
-                <p>Current count: {this.state.count}</p>
-            </div>
-        )
+        // return (
+        return <p>Count: {this.state.count}</p>
+        // )
     }
 
 }
 
+// @ts-ignore
 const App = (
     <div>
         {['h', 'm'].map((z,i)=> <p key={i}>Makin' makin' makin {z} stuff with React!</p>)}
