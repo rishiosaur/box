@@ -12,7 +12,22 @@ const createElement = (type: string | Function, props: Record<string, unknown> =
     return h(type, {props}, children.flat())
 }
 
-const Box = { createElement }
+ class Component<Props, State> {
+    state: State
+    props: Props
+
+    constructor(props: Props & { children: VNode } ){
+        this.props = props
+    }
+
+    componentDidMount() {}
+
+    setState(partialState: Partial<State>) {}
+
+    render() {}
+}
+
+const Box = { createElement, Component }
 
 const reconcile = init([propsModule])
 
@@ -24,6 +39,26 @@ const BoxDOM = { render }
 
 const Hello = ({ name }) => <p>Greetings, {name}</p>
 
+class Count extends Box.Component<{initial: number}, {count: number}> {
+    constructor(props) {
+        super(props);
+        this.setState({ count: this.props.initial })
+    }
+
+    componentDidMount() {
+        console.log("mounted")
+    }
+
+    render() {
+        return (
+            <div>
+                <p>Current count: {this.state.count}</p>
+            </div>
+        )
+    }
+
+}
+
 const App = (
     <div>
         {['h', 'm'].map((z,i)=> <p key={i}>Makin' makin' makin {z} stuff with React!</p>)}
@@ -31,6 +66,8 @@ const App = (
         <br/>
 
         <Hello name={"hi"}/>
+
+        <Count initial={3}/>
 
     </div>
 );
