@@ -3,5 +3,5 @@
     "plugins": [["@babel/plugin-transform-react-jsx", {
         "pragma": "Box.createElement",
         "throwIfNamespace": false
-    }]]
+    }], "babel-plugin-transform-class-properties"]
 }
