@@ -1,0 +1,7 @@
+{
+    "presets": ["@babel/react", "@babel/typescript", ["@babel/env", { "modules": false }]],
+    "plugins": [["@babel/plugin-transform-react-jsx", {
+        "pragma": "Box.createElement",
+        "throwIfNamespace": false
+    }]]
+}
