@@ -9,6 +9,7 @@ console.log(type)
 
     if (type.prototype && type.prototype.__isBoxClassComponent) {
         const instance = new type(props)
+
         instance.__node = instance.render()
         instance.__node.data.hook = {
             create: () => {
@@ -19,7 +20,12 @@ console.log(type)
     }
 
     if (typeof type === "function") {
-        return type(props)
+
+        const instance = type
+
+        type.__node = type(props)
+
+        return instance.__node
     }
 
     const dataProps = {}
@@ -34,9 +40,6 @@ console.log(type)
         }
     }
 
-
-
-
     return  h(type, {props: dataProps, on: eventProps}, children.flat())
 
 }
@@ -46,10 +49,11 @@ console.log(type)
     props: Props
      __isBoxClassComponent: boolean;
     __node: VNode;
-     static __isBoxClassComponent: boolean;
+
 
     constructor(props: Props){
         this.props = props
+
     }
 
     componentDidMount() {}
@@ -86,49 +90,67 @@ const render = (element: VNode, root: VNode | Element) => {
 
 const BoxDOM = { render }
 
-const Hello = ({ name }) => <p>Greetings, {name}</p>
-
-class Count extends Box.Component<{initial: number}, {count: number}> {
-    constructor(props: any) {
+class TodoInput extends Component<{ onSubmit: (todo: string) => void }, {  value: string }> {
+    constructor(props) {
         super(props);
-        this.state = { count: props.initial }
-        setInterval(() => {
-            this.setState({
-                count: this.state.count + 1
-            })
-        }, 1000);
-    }
-
-    componentDidMount() {
-        console.log("mounted")
+        this.state = {
+            value: ""
+        }
     }
 
     render() {
-        // return (
         return (
             <div>
-                <p>Count: {this.state.count}</p>
-                <button onClick={() => this.setState({ count: this.state.count + 1 })}>Hello</button>
-
-            </div>)
-        // )
+                <input onChange={(e) => {
+                    this.setState({value: e.target.value})
+                }} value={this.state.value} />
+                <button onClick={() => {
+                    this.props.onSubmit(this.state.value)
+                    this.setState({ value: "" })
+                }}>Add</button>
+            </div>
+        )
     }
+}
 
+interface Todo {
+    title: string
+    completed: boolean
 }
 
 // @ts-ignore
+class Todos extends Component< { }, { todos: Todo[] }> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            todos: []
+        }
+    }
+
+    onSubmit = (todo) => {
+        this.setState({
+            todos: this.state.todos.concat({ title: todo, completed: false })
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                {this.state.todos.map((todo, id) => {
+                    return <p onClick={() => {
+                        const value = todo
+                        this.setState({ todos: this.state.todos.filter(z => z!== value) })
+                    }}>{ todo.title }</p>
+                })}
+                <TodoInput onSubmit={this.onSubmit}/>
+
+            </div>
+        )
+    }
+}
+
 const App = (
-    <div>
-        {['h', 'm'].map((z,i)=> <p key={i}>Makin' makin' makin {z} stuff with React!</p>)}
+    <Todos/>
+)
 
-        <br/>
-
-        <Hello name={"hi"}/>
-
-        <Count initial={3}/>
-
-    </div>
-);
-
-
-BoxDOM.render(App as unknown as VNode, document.getElementById("root"))
+BoxDOM.render(App as any, document.getElementById("root"))
