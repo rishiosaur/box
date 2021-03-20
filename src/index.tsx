@@ -3,7 +3,13 @@ import { VNode } from 'snabbdom/build/package/vnode'
 import { init } from 'snabbdom/build/package/init'
 import {propsModule} from 'snabbdom/build/package/modules/props'
 
-const createElement = (type: string | Function, props: Record<string, unknown> = {}, ...children: VNode[] ) => {
+const createElement = (type: any, props: Record<string, unknown> = {}, ...children: VNode[] ) => {
+console.log(type)
+
+    if (type.prototype && type.prototype.__isBoxClassComponent) {
+         const instance = new type(props)
+        return instance.render()
+    }
 
     if (typeof type === "function") {
         return type(props)
@@ -15,6 +21,8 @@ const createElement = (type: string | Function, props: Record<string, unknown> =
  class Component<Props, State> {
     state: State
     props: Props
+     __isBoxClassComponent: boolean;
+
 
     constructor(props: Props & { children: VNode } ){
         this.props = props
@@ -26,6 +34,8 @@ const createElement = (type: string | Function, props: Record<string, unknown> =
 
     render() {}
 }
+
+Component.prototype.__isBoxClassComponent = true;
 
 const Box = { createElement, Component }
 
