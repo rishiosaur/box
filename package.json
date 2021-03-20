@@ -42,6 +42,7 @@
         "@typescript-eslint/eslint-plugin": "^4.1.0",
         "@typescript-eslint/parser": "^4.1.0",
         "babel-loader": "^8.0.6",
+        "babel-plugin-transform-class-properties": "^6.24.1",
         "eslint": "^7.9.0",
         "eslint-config-airbnb": "^18.2.0",
         "eslint-config-prettier": "^6.11.0",
