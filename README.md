@@ -1,5 +1,12 @@
 # Box
 
+![lint status](https://github.com/rishiosaur/box/workflows/lint/badge.svg)
+![format status](https://github.com/rishiosaur/box/workflows/format/badge.svg)
+![GitHub](https://img.shields.io/github/license/rishiosaur/box)
+![GitHub issues](https://img.shields.io/github/issues/rishiosaur/box)
+![GitHub contributors](https://img.shields.io/github/contributors/rishiosaur/box)
+![GitHub last commit](https://img.shields.io/github/last-commit/rishiosaur/box)
+
 A simple tutorial for implementing a React-like library. Uses `snabbdom` under the hood.
 
 ## How to use this?
