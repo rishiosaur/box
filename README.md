@@ -11,6 +11,8 @@ A simple tutorial for implementing a React-like library. Uses `snabbdom` under t
 
 ## How to use this?
 
+0. Look through prerequisites from the [documentation](https://ootb.rishi.cx/react)
+
 1. Clone the repository
 
 ```sh
@@ -31,15 +33,15 @@ yarn start:dev
 
 ## Structure
 
-| Branch                                   | Purpose                                                         |
-| ---------------------------------------- | --------------------------------------------------------------- |
-| [main](z.rishi.cx/g/box/)                | Starting files to get to understand the codebase.               |
-| [stage-1](z.rishi.cx/g/box/tree/stage-1) | Rendering our first components & inspecting the VDOM            |
-| [stage-2](z.rishi.cx/g/box/tree/stage-2) | Support for functional components                               |
-| [stage-3](z.rishi.cx/g/box/tree/stage-3) | Support for class components & a prototypal inheritance feature |
-| [stage-4](z.rishi.cx/g/box/tree/stage-4) | Support for lifecycle hooks & adding state                      |
-| [stage-5](z.rishi.cx/g/box/tree/stage-5) | Support for events & basic props                                |
-| [stage-6](z.rishi.cx/g/box/tree/stage-6) | Building a basic Todo list app                                  |
+| Branch                                           | Purpose                                                         |
+| ------------------------------------------------ | --------------------------------------------------------------- |
+| [main](https://z.rishi.cx/g/box/)                | Starting files to get to understand the codebase.               |
+| [stage-1](https://z.rishi.cx/g/box/tree/stage-1) | Rendering our first components & inspecting the VDOM            |
+| [stage-2](https://z.rishi.cx/g/box/tree/stage-2) | Support for functional components                               |
+| [stage-3](https://z.rishi.cx/g/box/tree/stage-3) | Support for class components & a prototypal inheritance feature |
+| [stage-4](https://z.rishi.cx/g/box/tree/stage-4) | Support for lifecycle hooks & adding state                      |
+| [stage-5](https://z.rishi.cx/g/box/tree/stage-5) | Support for events & basic props                                |
+| [stage-6](https://z.rishi.cx/g/box/tree/stage-6) | Building a basic Todo list app                                  |
 
 ### Navigating branches
 
