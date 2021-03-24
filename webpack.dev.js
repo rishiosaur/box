@@ -6,7 +6,7 @@ module.exports = {
     entry: './src/index.ts',
     devServer: {
         port: 3000,
-        contentBase: path.join(__dirname, "dist")
+        contentBase: path.join(__dirname, 'dist')
     },
     node: {
         fs: 'empty'
