@@ -1,4 +1,4 @@
-# Box
+# 📦 Box
 
 ![lint status](https://github.com/rishiosaur/box/workflows/lint/badge.svg)
 ![format status](https://github.com/rishiosaur/box/workflows/format/badge.svg)
