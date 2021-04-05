@@ -26,7 +26,8 @@
         "react/jsx-props-no-spreading": 0,
         "import/no-named-default": 0,
         "no-use-before-define": 0,
-        "import/no-unresolved": 0
+        "import/no-unresolved": 0,
+        "import/no-extraneous-dependencies": 0
     },
     "settings": {
         "import/parsers": {
