@@ -3,9 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
 	devtool: 'eval-cheap-module-source-map',
-	entry: './src/index.tsx',
+	entry: './src/index.ts',
 	devServer: {
-		port: 3000,
+		port: 6208,
 		contentBase: path.join(__dirname, 'dist'),
 	},
 	node: {
