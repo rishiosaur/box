@@ -26,7 +26,7 @@ npm manifest:
   	"name": "box-tutorial",
   	"version": "0.0.1",
   	"description": "A tiny react-like implementation.",
-  	"main": "src/index.ts",
+  	"main": "src/index.tsx",
   	"scripts": {
   		"test": "echo \"Error: no test specified\" && exit 1",
   		"start": "webpack-dev-server --config webpack.dev.js --mode development",

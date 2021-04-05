@@ -6,7 +6,7 @@ const buildPath = path.resolve(__dirname, 'dist')
 
 module.exports = {
 	devtool: 'source-map',
-	entry: './src/index.ts',
+	entry: './src/index.tsx',
 	output: {
 		filename: '[name].[hash:20].js',
 		path: buildPath,
