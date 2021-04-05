@@ -11,10 +11,13 @@ module.exports = {
 	node: {
 		fs: 'empty',
 	},
+	resolve: {
+		extensions: [".ts", ".tsx", ".jsx", ".js", ".json"]
+	},
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.(js|jsx|ts|tsx)$/,
 				exclude: /node_modules/,
 				loader: 'babel-loader',
 				options: {
