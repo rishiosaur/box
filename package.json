@@ -31,6 +31,7 @@
 	"homepage": "https://github.com/rishiosaur/box#readme",
 	"dependencies": {
 		"@babel/preset-react": "^7.12.13",
+		"html-webpack-plugin": "^4.5.2",
 		"normalize.css": "^8.0.0",
 		"react": "^17.0.2",
 		"snabbdom": "^2.1.0"
